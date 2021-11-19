@@ -30,7 +30,7 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
-	GLFWwindow* window = glfwCreateWindow(1000, 1000, "GOVNO", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1280, 720, "GOVNO", NULL, NULL);
 	glfwMakeContextCurrent(window);
 
 
