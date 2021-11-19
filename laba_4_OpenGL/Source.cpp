@@ -9,13 +9,39 @@ using namespace std;
 GLfloat vertices[] = {
 	-0.5f, -0.5f, 0.0f,
 	 0.5f, -0.5f, 0.0f,
-	 0.0f,  0.5f, 0.0f
+	 0.0f,  0.5f, 0.0f,
+
+	 0.0f,  0.0f, 0.5f,
+	 0.5f, -0.5f, 0.0f,
+	 0.0f,  0.5f, 0.0f,
+
+
+	-0.5f, -0.5f, 0.0f,
+	 0.5f, -0.5f, 0.0f,
+	 0.0f,  0.0f, 0.5f,
+
+	-0.5f, -0.5f, 0.0f,
+	 0.0f,  0.5f, 0.0f,
+	 0.0f,  0.0f, 0.5f
 };
+
 GLfloat color[]{
 
 	1.0, 0.5, 0.5,
 	0.0, 0.5, 0.5,
-	0.5, 0.5, 0.5
+	0.5, 0.5, 0.5,
+
+	0.5, 0.5, 0.5,
+	0.5, 0.5, 0.5,
+	0.5, 0.5, 0.5,
+
+	0.7, 0.2, 0.6,
+	0.7, 0.2, 0.6,
+	0.7, 0.2, 0.6,
+
+	0.4, 0.4, 0.5,
+	0.4, 0.4, 0.5,
+	0.4, 0.4, 0.5
 };
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -41,7 +67,7 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
-	GLFWwindow* window = glfwCreateWindow(1280, 720, "GOVNO", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1280, 1000, "GOVNO", NULL, NULL);
 	glfwMakeContextCurrent(window);
 
 
@@ -153,13 +179,13 @@ int main() {
 		glUseProgram(Program);
 		glBindVertexArray(VAO);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 12);
 
 
 
 
 
-		//glDeleteProgram(Program);
+	
 
 		//oooo
 
@@ -168,9 +194,10 @@ int main() {
 		glfwSwapBuffers(window);
 
 	}
+	glDeleteProgram(Program);
 	glfwTerminate();
 
-
+	
 
 
 
