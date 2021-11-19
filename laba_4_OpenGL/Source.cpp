@@ -48,6 +48,24 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		string shaderCode;
+		ifstream shaderFile;
+		stringstream shaderStream;
+		shaderFile.open("Top_shade.cpp");
+		shaderStream << shaderFile.rdbuf();
+		shaderFile.close();
+		shaderCode = shaderStream.str();
+		const char* ShaderSource = shaderCode.c_str();
+
+
+		string shaderCode1;
+		ifstream shaderFile1;
+		stringstream shaderStream1;
+		shaderFile1.open("Frag_shade.cpp");
+		shaderStream1 << shaderFile1.rdbuf();
+		shaderFile1.close();
+		shaderCode1 = shaderStream1.str();
+		const char* ShaderSource1 = shaderCode1.c_str();
 
 	//	glUseProgram(Program);
 	//	glBindVertexArray(VAO);
