@@ -57,6 +57,43 @@ void processInput(GLFWwindow* window)
 }
 
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+
+	if ((key == GLFW_KEY_A) && (action == GLFW_REPEAT)) {
+		for (int i = 0; i < 44; i++)
+		{
+			//colors[i] = colors[i] + 0.1;
+
+		}
+	}
+	if ((key == GLFW_KEY_A) && (action == GLFW_RELEASE))
+	{
+		for (int i = 0; i < 44; i++)
+		{
+			//colors[i] = colors[i] - 0.1;
+
+		}
+	}
+
+};
+
+
+
+void mouse_place(GLFWwindow* window, double xPos, double yPos) {
+
+	/*cout << xPos << "  " << yPos << endl;*/
+
+	for (int i = 16; i < 27; i++)
+	{
+
+
+		//colors[i] = xPos / 1000.0;
+		//cout << colors[i] << "  " << i << endl;
+	}
+
+};
+
+
 int main() {
 
 	glfwInit();
@@ -74,6 +111,8 @@ int main() {
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 
+	glfwSetKeyCallback(window, key_callback);
+	glfwSetCursorPosCallback(window, mouse_place);
 
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	string shaderCode;
@@ -168,10 +207,17 @@ int main() {
 
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
+
+
+
+
 	while (!glfwWindowShouldClose(window))
 	{
 		// Обработка ввода
 		processInput(window);
+
+	
+
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
