@@ -1,10 +1,16 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
 using namespace std;
+using namespace glm;
 
 GLfloat vertices[] = {
 	-0.5f, -0.5f, 0.0f,
@@ -57,12 +63,15 @@ void processInput(GLFWwindow* window)
 }
 
 
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
 	if ((key == GLFW_KEY_A) && (action == GLFW_REPEAT)) {
 		for (int i = 0; i < 44; i++)
 		{
+			glLoadIdentity();
 			//colors[i] = colors[i] + 0.1;
+			glRotate(30.0f, 1.0f, 0.0f, 0.0f);
 
 		}
 	}
@@ -76,7 +85,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 
 };
-
 
 
 void mouse_place(GLFWwindow* window, double xPos, double yPos) {
@@ -104,9 +112,9 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	//gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
-	GLFWwindow* window = glfwCreateWindow(1280, 1000, "GOVNO", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(1000, 1000, "GOVNO", NULL, NULL);
 	glfwMakeContextCurrent(window);
-
+	
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
@@ -209,14 +217,14 @@ int main() {
 
 
 
-
+	int f = 0;
 
 	while (!glfwWindowShouldClose(window))
 	{
 		// Обработка ввода
 		processInput(window);
 
-	
+		f++;
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -227,7 +235,7 @@ int main() {
 
 		glDrawArrays(GL_TRIANGLES, 0, 12);
 
-
+		
 
 
 
