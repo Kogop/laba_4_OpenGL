@@ -5,12 +5,15 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <iostream>
+#include <iostream>;
 #include <fstream>
 #include <sstream>
 
 using namespace std;
-using namespace glm;
+
+
+
+
 
 GLfloat vertices[] = {
 	-0.5f, -0.5f, 0.0f,
@@ -69,9 +72,9 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if ((key == GLFW_KEY_A) && (action == GLFW_REPEAT)) {
 		for (int i = 0; i < 44; i++)
 		{
-			glLoadIdentity();
+			//glLoadIdentity();
 			//colors[i] = colors[i] + 0.1;
-			glRotate(30.0f, 1.0f, 0.0f, 0.0f);
+			//
 
 		}
 	}
@@ -214,9 +217,9 @@ int main() {
 	glEnableVertexAttribArray(1);
 
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-
-
-
+	
+	
+	
 	int f = 0;
 
 	while (!glfwWindowShouldClose(window))
@@ -226,17 +229,24 @@ int main() {
 
 		f++;
 
+		//glm::mat4 MatModel = glm::rotate(glm::mat4(1.0f), glm::radians(f * 1.0), glm::vec3(1.0, 2.0, 3.0));
+		glm::mat4 MatModel = glm::mat4(1.0f);
+		//GLint glGetUniformLocation(Program, MatModel);
+		//glUniformMatrix(glGetUniformLocation(MatModel, 1, NULL, GLFloat value_ptr(mat4 & mat)));
+
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		
 		glUseProgram(Program);
+
+
+
 		glBindVertexArray(VAO);
 
 		glDrawArrays(GL_TRIANGLES, 0, 12);
 
-		
-
+	
 
 
 	
