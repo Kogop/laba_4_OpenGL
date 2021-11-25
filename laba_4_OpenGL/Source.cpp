@@ -1,13 +1,15 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
+//    / NODEFAULTLIB:"MSVCRT"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <iostream>;
-#include <fstream>
-#include <sstream>
+
 
 using namespace std;
 
@@ -36,21 +38,21 @@ GLfloat vertices[] = {
 
 GLfloat color[]{
 
-	1.0, 0.5, 0.5,
-	0.0, 0.5, 0.5,
-	0.5, 0.5, 0.5,
+	1.0f, 0.5f, 0.5f,
+	0.0f, 0.5f, 0.5f,
+	0.5f, 0.5f, 0.5f,
 
-	0.5, 0.5, 0.5,
-	0.5, 0.5, 0.5,
-	0.5, 0.5, 0.5,
+	0.5f, 0.5f, 0.5f,
+	0.5f, 0.5f, 0.5f,
+	0.5f, 0.5f, 0.5f,
 
-	0.7, 0.2, 0.6,
-	0.7, 0.2, 0.6,
-	0.7, 0.2, 0.6,
+	0.7f, 0.2f, 0.6f,
+	0.7f, 0.2f, 0.6f,
+	0.7f, 0.2f, 0.6f,
 
-	0.4, 0.4, 0.5,
-	0.4, 0.4, 0.5,
-	0.4, 0.4, 0.5
+	0.4f, 0.4f, 0.5f,
+	0.4f, 0.4f, 0.5f,
+	0.4f, 0.4f, 0.5f
 };
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
