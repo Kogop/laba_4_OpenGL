@@ -12,5 +12,5 @@ uniform mat4 MatModel;
 void main() {
 	Color = vertexColor;
 	
-	gl_Position = MatModel * vec4(vertexPosition, 1.0);
+	gl_Position = /*MatModel **/ vec4(vertexPosition, 1.0);
 }
