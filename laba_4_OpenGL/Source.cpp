@@ -235,11 +235,11 @@ int main() {
 		glUseProgram(Program);
 
 		//glm::mat4 MatVida = glm::mat4(1.0f);
-		glm::mat4 MatVida = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 MatVida = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		glm::mat4 MatPerspective = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
 
 
-		glm::mat4 MatModel = glm::rotate(glm::mat4(1.0f), glm::radians(f * 1.0f), glm::vec3(1.0, 2.0, 3.0));
+		glm::mat4 MatModel = glm::rotate(glm::mat4(1.0f), glm::radians(f * 1.0f), glm::vec3(0.0, 3.0, 0.0));
 		//
 		//glm::mat4 matrixRotate = glm::rotate(glm::mat4(1.0f), glm::radians(10.0f), glm::vec3(0, 0, 1));   vot tak rabotaet
 
