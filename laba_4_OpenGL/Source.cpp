@@ -220,27 +220,44 @@ int main() {
 
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	
+	glEnable(GL_DEPTH_TEST);
+
 	
 	
-	int f = 0;
+	float f = 0.0;
 
 	while (!glfwWindowShouldClose(window))
 	{
 		// Обработка ввода
 		processInput(window);
 
-		f++;
+		f = f + 1;
+		glUseProgram(Program);
 
-		//glm::mat4 MatModel = glm::rotate(glm::mat4(1.0f), glm::radians(f * 1.0), glm::vec3(1.0, 2.0, 3.0));
-		glm::mat4 MatModel = glm::mat4(1.0f);
-		//GLint glGetUniformLocation(Program, MatModel);
-		//glUniformMatrix(glGetUniformLocation(MatModel, 1, NULL, GLFloat value_ptr(mat4 & mat)));
+		//glm::mat4 MatVida = glm::mat4(1.0f);
+		glm::mat4 MatVida = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 MatPerspective = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
+
+
+		glm::mat4 MatModel = glm::rotate(glm::mat4(1.0f), glm::radians(f * 1.0f), glm::vec3(1.0, 2.0, 3.0));
+		//
+		//glm::mat4 matrixRotate = glm::rotate(glm::mat4(1.0f), glm::radians(10.0f), glm::vec3(0, 0, 1));   vot tak rabotaet
+
+		//glm::mat4 MatModel = glm::mat4(1.0f);
+		GLint location = glGetUniformLocation(Program, "MatModel");            //obyazatelno nayti mesto matrix and otpravit ego
+		glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(MatModel));
+
+		GLint location1 = glGetUniformLocation(Program, "MatVida");
+		glUniformMatrix4fv(location1, 1, GL_FALSE, glm::value_ptr(MatVida));
+
+		GLint location2 = glGetUniformLocation(Program, "MatPerspective");
+		glUniformMatrix4fv(location2, 1, GL_FALSE, glm::value_ptr(MatPerspective));
 
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		
-		glUseProgram(Program);
+		
 
 
 
