@@ -83,7 +83,7 @@ void processInput(GLFWwindow* window)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
-	if ((key == GLFW_KEY_A) && (action == GLFW_REPEAT)) {
+	if ((key == GLFW_KEY_W) && (action == GLFW_PRESS)) {
 		for (int i = 0; i < 44; i++)
 		{
 			//glLoadIdentity();
@@ -92,7 +92,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 		}
 	}
-	if ((key == GLFW_KEY_A) && (action == GLFW_RELEASE))
+	if ((key == GLFW_KEY_S) && (action == GLFW_PRESS))
 	{
 		for (int i = 0; i < 44; i++)
 		{
@@ -108,6 +108,7 @@ double yMouse = 500.0;
 
 float yaw = -90.0f;
 float pitch = 0.0f;
+glm::vec3 direction;
 void mouse_place(GLFWwindow* window, double xPos, double yPos) {
 
 	/*cout << xPos << "  " << yPos << endl;*/
@@ -136,7 +137,7 @@ void mouse_place(GLFWwindow* window, double xPos, double yPos) {
 		pitch = -89.0f;
 
 
-	glm::vec3 direction;
+	
 	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 	direction.y = sin(glm::radians(pitch));
 	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
