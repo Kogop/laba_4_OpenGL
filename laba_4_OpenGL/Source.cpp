@@ -13,9 +13,21 @@
 
 using namespace std;
 
+//float d[3] = { 0.0f, 0.0f, 1.0f };
+//float t[3] = { 0.0f, 0.0f, 0.0f };
+//float u[3] = { 0.0f, 1.0f, 0.0f };
+//float t[3] = p - d;
+glm::vec3 VectorPosition = glm::vec3(0.0f, 0.0f, 2.0f);
+//glm::vec3 VectorNapravlenia = glm::vec3(0.0f, 0.0f, -1.0f);
 
 
+glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraDirection = glm::normalize(VectorPosition - cameraTarget);
+glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
+glm::vec3 cameraUp = glm::cross(cameraDirection, cameraRight);
 
+glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 
 GLfloat vertices[] = {
 	-0.5f, -0.5f, 0.0f,
@@ -91,19 +103,44 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 };
 
+double xMouse = 500.0;
+double yMouse = 500.0;
 
+float yaw = -90.0f;
+float pitch = 0.0f;
 void mouse_place(GLFWwindow* window, double xPos, double yPos) {
 
 	/*cout << xPos << "  " << yPos << endl;*/
 
-	for (int i = 16; i < 27; i++)
-	{
+	//for (int i = 16; i < 27; i++)
+	//{
+	//double xMouseNow = xPos;
+	//double yMouseNow = yPos;
+	
+	float xoffset = xPos - xMouse;
+	float yoffset = yMouse - yPos; // уменьшаемое и вычитаемое поменяны местами, так как диапазон y-координаты определяется снизу вверх
+	xMouse = xPos;
+	yMouse = yPos;
+
+	const float sensitivity = 0.05f;
+	xoffset *= sensitivity;
+	yoffset *= sensitivity;
+
+	yaw += xoffset;
+	pitch += yoffset;
 
 
-		//colors[i] = xPos / 1000.0;
-		//cout << colors[i] << "  " << i << endl;
-	}
+	if (pitch > 89.0f)
+		pitch = 89.0f;
+	if (pitch < -89.0f)
+		pitch = -89.0f;
 
+
+	glm::vec3 direction;
+	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	direction.y = sin(glm::radians(pitch));
+	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	cameraFront = glm::normalize(direction);
 };
 
 
@@ -126,6 +163,10 @@ int main() {
 
 	glfwSetKeyCallback(window, key_callback);
 	glfwSetCursorPosCallback(window, mouse_place);
+
+
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	string shaderCode;
@@ -234,8 +275,13 @@ int main() {
 		f = f + 1;
 		glUseProgram(Program);
 
+
+
+
+
+
 		//glm::mat4 MatVida = glm::mat4(1.0f);
-		glm::mat4 MatVida = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glm::mat4 MatVida = glm::lookAt(VectorPosition, cameraDirection + cameraFront, cameraUp);
 		glm::mat4 MatPerspective = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
 		//TODO   sdelat d MatVida kajdiy vector otdelnim, chtobi mojno bilo menyat pri dvijenii kameri. 
 

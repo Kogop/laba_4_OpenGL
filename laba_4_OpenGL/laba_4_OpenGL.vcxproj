@@ -80,8 +80,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\neste\source\Repos\laba_4_OpenGL\GL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\neste\source\Repos\laba_4_OpenGL\GL\lib-vc2019;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\18vf1-1\source\repos\laba_4_OpenGL_sKompa\GL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\18vf1-1\source\repos\laba_4_OpenGL_sKompa\GL\lib-vc2019;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
