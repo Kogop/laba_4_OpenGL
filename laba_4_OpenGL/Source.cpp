@@ -35,20 +35,20 @@ glm::vec3 cameraUp = glm::cross(cameraDirection, cameraRight);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
 
 GLfloat vertices[] = {
-	-0.5f, -0.5f, 0.0f,
+	-0.5f, -0.5f, 0.0f,    //front
 	 0.5f, -0.5f, 0.0f,
 	 0.0f,  0.5f, 0.0f,
 
-	 0.0f,  0.0f, 0.5f,
+	 0.0f,  0.0f, 0.5f,   //right
 	 0.5f, -0.5f, 0.0f,
 	 0.0f,  0.5f, 0.0f,
 
 
-	-0.5f, -0.5f, 0.0f,
+	-0.5f, -0.5f, 0.0f,   //bottom
 	 0.5f, -0.5f, 0.0f,
 	 0.0f,  0.0f, 0.5f,
 
-	-0.5f, -0.5f, 0.0f,
+	-0.5f, -0.5f, 0.0f,   //left
 	 0.0f,  0.5f, 0.0f,
 	 0.0f,  0.0f, 0.5f
 };
@@ -71,6 +71,9 @@ GLfloat color[]{
 	0.4f, 0.4f, 0.5f,
 	0.4f, 0.4f, 0.5f
 };
+
+
+
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -229,6 +232,25 @@ int main() {
 
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	GLfloat normali[36];
+	double n[4];
+	for (int i = 0; i < 4; i++)
+	{
+		double a[3];
+		double b[3];
+		for (int j = 0; j < 3; j++)
+		{
+			 a[i] = vertices[3 * i + j];
+			cout << normali[i] << endl;
+		}
+		
+	}
+	
+
+
+
+
+
 
 
 	gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
