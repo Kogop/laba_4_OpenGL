@@ -17,7 +17,12 @@ using namespace std;
 //float t[3] = { 0.0f, 0.0f, 0.0f };
 //float u[3] = { 0.0f, 1.0f, 0.0f };
 //float t[3] = p - d;
-glm::vec3 VectorPosition = glm::vec3(0.0f, 0.0f, 2.0f);
+
+float xP = 0.0f;
+float yP = 0.0f;
+float zP = 2.0f;
+
+glm::vec3 VectorPosition = glm::vec3(xP, yP, zP);
 //glm::vec3 VectorNapravlenia = glm::vec3(0.0f, 0.0f, -1.0f);
 
 
@@ -83,23 +88,66 @@ void processInput(GLFWwindow* window)
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
-	if ((key == GLFW_KEY_W) && (action == GLFW_PRESS)) {
-		for (int i = 0; i < 44; i++)
-		{
+	if ((key == GLFW_KEY_W) && (action == GLFW_REPEAT)) {
+		
+		
+		VectorPosition -= cameraDirection * 0.1f;
+		
+		//for (int i = 0; i < 44; i++)
+		//{
 			//glLoadIdentity();
 			//colors[i] = colors[i] + 0.1;
 			//
 
-		}
+		//}
 	}
-	if ((key == GLFW_KEY_S) && (action == GLFW_PRESS))
-	{
-		for (int i = 0; i < 44; i++)
-		{
+	if ((key == GLFW_KEY_S) && (action == GLFW_REPEAT)){
+
+
+		VectorPosition += cameraDirection * 0.1f;
+
+
+
+
+
+	//	for (int i = 0; i < 44; i++)
+	//	{
 			//colors[i] = colors[i] - 0.1;
 
-		}
+	//	}
 	}
+
+	if ((key == GLFW_KEY_A) && (action == GLFW_REPEAT)) {
+
+
+		cameraRight = glm::normalize(glm::cross(up, cameraFront));
+		VectorPosition += cameraRight * 0.1f;
+		//for (int i = 0; i < 44; i++)
+		//{
+			//glLoadIdentity();
+			//colors[i] = colors[i] + 0.1;
+			//
+
+		//}
+	}
+	if ((key == GLFW_KEY_D) && (action == GLFW_REPEAT)) {
+
+
+		cameraRight = glm::normalize(glm::cross(up, cameraFront));
+		VectorPosition -= cameraRight * 0.1f;
+
+		//for (int i = 0; i < 44; i++)
+		//{
+			//glLoadIdentity();
+			//colors[i] = colors[i] + 0.1;
+			//
+
+		//}
+	}
+
+
+
+
 
 };
 
@@ -109,6 +157,8 @@ double yMouse = 500.0;
 float yaw = -90.0f;
 float pitch = 0.0f;
 glm::vec3 direction;
+
+bool LastUse = 1;
 void mouse_place(GLFWwindow* window, double xPos, double yPos) {
 
 	/*cout << xPos << "  " << yPos << endl;*/
@@ -117,31 +167,43 @@ void mouse_place(GLFWwindow* window, double xPos, double yPos) {
 	//{
 	//double xMouseNow = xPos;
 	//double yMouseNow = yPos;
-	
-	float xoffset = xPos - xMouse;
-	float yoffset = yMouse - yPos; // уменьшаемое и вычитаемое поменяны местами, так как диапазон y-координаты определяется снизу вверх
-	xMouse = xPos;
-	yMouse = yPos;
 
-	const float sensitivity = 0.05f;
-	xoffset *= sensitivity;
-	yoffset *= sensitivity;
-
-	yaw += xoffset;
-	pitch += yoffset;
+	if (LastUse)
+	{
+		xMouse = xPos;
+		yMouse = yPos;
+		LastUse = 0;
+	}
+	else
+	{
+			
 
 
-	if (pitch > 89.0f)
-		pitch = 89.0f;
-	if (pitch < -89.0f)
-		pitch = -89.0f;
+		float xoffset = xPos - xMouse;
+		float yoffset = yMouse - yPos; // уменьшаемое и вычитаемое поменяны местами, так как диапазон y-координаты определяется снизу вверх
+		xMouse = xPos;
+		yMouse = yPos;
+
+		const float sensitivity = 0.05f;
+		xoffset *= sensitivity;
+		yoffset *= sensitivity;
+
+		yaw += xoffset;
+		pitch += yoffset;
 
 
-	
-	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	direction.y = sin(glm::radians(pitch));
-	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	cameraFront = glm::normalize(direction);
+		if (pitch > 89.0f)
+			pitch = 89.0f;
+		if (pitch < -89.0f)
+			pitch = -89.0f;
+
+
+
+		direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+		direction.y = sin(glm::radians(pitch));
+		direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+		cameraFront = glm::normalize(direction);
+	}
 };
 
 
@@ -282,7 +344,7 @@ int main() {
 
 
 		//glm::mat4 MatVida = glm::mat4(1.0f);
-		glm::mat4 MatVida = glm::lookAt(VectorPosition, cameraDirection + cameraFront, cameraUp);
+		glm::mat4 MatVida = glm::lookAt(VectorPosition, VectorPosition + cameraFront , cameraUp);
 		glm::mat4 MatPerspective = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
 		//TODO   sdelat d MatVida kajdiy vector otdelnim, chtobi mojno bilo menyat pri dvijenii kameri. 
 
