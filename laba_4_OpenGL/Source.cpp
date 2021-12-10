@@ -233,17 +233,42 @@ int main() {
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	GLfloat normali[36];
-	double n[4];
+	glm::vec3 n[4];
 	for (int i = 0; i < 4; i++)
 	{
-		double a[3];
-		double b[3];
-		for (int j = 0; j < 3; j++)
+		glm::vec3 a[4] /*= { {0,0,0},{0,0,0},{0,0,0},{0,0,0} }*/;
+		//glm::vec3  b[4];
+
+
+
+		for (int j = 0; j < 9; j = j + 3)
 		{
-			 a[i] = vertices[3 * i + j];
-			cout << normali[i] << endl;
-		}
-		
+			int k = 0;
+			// a[j] = vertices[3 * i + j];
+			// b[i] = vertices[3 * i + j];
+			a[k].x = vertices[j];
+			a[k].y = vertices[j + 1];
+			a[k].z = vertices[j + 2];
+			k++;
+		};
+			//a[] = { vertices[j],vertices[j + 1], vertices[j + 2] };
+			//k++;
+			//cout << normali[i] << endl;
+		//int k = i;
+		//if (k > 2)
+		//{
+		//	k = 0;
+		glm::vec3 v[2] ;
+		v[0] = a[0] - a[1];
+		v[1] = a[2] - a[1];
+
+
+			n[i] = glm::normalize(glm::cross(v[0], v[1]));
+		//}
+	
+		cout << a[i].x << '\t' << a[i].y << '\t' << a[i].z << endl;
+
+		cout << n[i].x << '\t' <<n[i].y << '\t' << n[i].z << endl;
 	}
 	
 
