@@ -22,6 +22,9 @@ float xP = 0.0f;
 float yP = 0.0f;
 float zP = 2.0f;
 
+
+
+
 glm::vec3 VectorPosition = glm::vec3(xP, yP, zP);
 //glm::vec3 VectorNapravlenia = glm::vec3(0.0f, 0.0f, -1.0f);
 
@@ -72,7 +75,7 @@ GLfloat color[]{
 	0.4f, 0.4f, 0.5f
 };
 
-
+GLfloat normali[36];
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -232,25 +235,76 @@ int main() {
 
 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	GLfloat normali[36];
+	//glm::vec3 normali[12];
 	glm::vec3 n[4];
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		glm::vec3 a[4] /*= { {0,0,0},{0,0,0},{0,0,0},{0,0,0} }*/;
+		glm::vec3 a[12] /*= { {0,0,0},{0,0,0},{0,0,0},{0,0,0} }*/;
 		//glm::vec3  b[4];
 
 
 
-		for (int j = 0; j < 9; j = j + 3)
-		{
-			int k = 0;
-			// a[j] = vertices[3 * i + j];
-			// b[i] = vertices[3 * i + j];
-			a[k].x = vertices[j];
-			a[k].y = vertices[j + 1];
-			a[k].z = vertices[j + 2];
-			k++;
-		};
+
+
+
+		//for (int j = 0; j < 9; j = j + 3)
+		//{
+		//	int k = 0;
+		//	// a[j] = vertices[3 * i + j];
+		//	// b[i] = vertices[3 * i + j];
+
+			//1
+			a[0].x = vertices[0];
+			a[0].y = vertices[1];
+			a[0].z = vertices[2];
+
+			a[1].x = vertices[3];
+			a[1].y = vertices[4];
+			a[1].z = vertices[5];
+
+			a[2].x = vertices[6];
+			a[2].y = vertices[7];
+			a[2].z = vertices[8];
+			//2
+			a[3].x = vertices[9];
+			a[3].y = vertices[10];
+			a[3].z = vertices[11];
+
+			a[4].x = vertices[12];
+			a[4].y = vertices[13];
+			a[4].z = vertices[14];
+
+			a[5].x = vertices[15];
+			a[5].y = vertices[16];
+			a[5].z = vertices[17];
+			//3
+			a[6].x = vertices[18];
+			a[6].y = vertices[19];
+			a[6].z = vertices[20];
+
+			a[7].x = vertices[21];
+			a[7].y = vertices[22];
+			a[7].z = vertices[23];
+
+			a[8].x = vertices[24];
+			a[8].y = vertices[25];
+			a[8].z = vertices[26];
+			//4
+			a[9].x = vertices[27];
+			a[9].y = vertices[28];
+			a[9].z = vertices[29];
+
+			a[10].x = vertices[30];
+			a[10].y = vertices[31];
+			a[10].z = vertices[32];
+
+			a[11].x = vertices[33];
+			a[11].y = vertices[34];
+			a[11].z = vertices[35];
+
+
+		//	k++;
+		//};
 			//a[] = { vertices[j],vertices[j + 1], vertices[j + 2] };
 			//k++;
 			//cout << normali[i] << endl;
@@ -258,17 +312,78 @@ int main() {
 		//if (k > 2)
 		//{
 		//	k = 0;
-		glm::vec3 v[2] ;
+		glm::vec3 v[8];
 		v[0] = a[0] - a[1];
 		v[1] = a[2] - a[1];
 
+		v[2] = a[3] - a[4];
+		v[3] = a[5] - a[4];
 
-			n[i] = glm::normalize(glm::cross(v[0], v[1]));
+		v[4] = a[6] - a[7];
+		v[5] = a[8] - a[7];
+
+		v[6] = a[9] - a[10];
+		v[7] = a[11] - a[10];
+
+
+			n[0] = glm::normalize(glm::cross(v[0], v[1])); // front
+
+			n[1] = glm::normalize(glm::cross(v[3], v[2])); // side
+
+			n[2] = glm::normalize(glm::cross(v[5], v[4]));  // bottom
+
+			n[3] = glm::normalize(glm::cross(v[6], v[7])); // side
 		//}
-	
-		cout << a[i].x << '\t' << a[i].y << '\t' << a[i].z << endl;
+			normali[0] = n[0].x;
+			normali[1] = n[0].y;
+			normali[2] = n[0].z;
+			normali[3] = n[0].x;
+			normali[4] = n[0].y;
+			normali[5] = n[0].z;
+			normali[6] = n[0].x;
+			normali[7] = n[0].y;
+			normali[8] = n[0].z;
 
-		cout << n[i].x << '\t' <<n[i].y << '\t' << n[i].z << endl;
+			normali[9] = n[1].x;
+			normali[10] = n[1].y;
+			normali[11] = n[1].z;
+			normali[12] = n[1].x;
+			normali[13] = n[1].y;
+			normali[14] = n[1].z;
+			normali[15] = n[1].x;
+			normali[16] = n[1].y;
+			normali[17] = n[1].z;
+
+			normali[18] = n[2].x;
+			normali[19] = n[2].y;
+			normali[20] = n[2].z;
+			normali[21] = n[2].x;
+			normali[22] = n[2].y;
+			normali[23] = n[2].z;
+			normali[24] = n[2].x;
+			normali[25] = n[2].y;
+			normali[26] = n[2].z;
+
+			normali[27] = n[3].x;
+			normali[28] = n[3].y;
+			normali[29] = n[3].z;
+			normali[30] = n[3].x;
+			normali[31] = n[3].y;
+			normali[32] = n[3].z;
+			normali[33] = n[3].x;
+			normali[34] = n[3].y;
+			normali[35] = n[3].z;
+
+
+	
+		//cout << a[i].x << '\t' << a[i].y << '\t' << a[i].z << endl;
+
+		//cout << v[i].x << '\t' <<v[i].y << '\t' << v[i].z << endl;
+
+		cout << n[0].x << '\t' << n[0].y << '\t' << n[0].z << endl;
+		cout << n[1].x << '\t' << n[1].y << '\t' << n[1].z << endl;
+		cout << n[2].x << '\t' << n[2].y << '\t' << n[2].z << endl;
+		cout << n[3].x << '\t' << n[3].y << '\t' << n[3].z << endl;
 	}
 	
 
@@ -357,7 +472,7 @@ int main() {
 	GLuint VAO;
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
-	GLuint VBO1, VBO2;
+	GLuint VBO1, VBO2, VBO3;
 	glGenBuffers(1, &VBO1);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO1);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -370,6 +485,14 @@ int main() {
 	glEnableVertexAttribArray(1);
 
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	glGenBuffers(1, &VBO3);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO3);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(normali), normali, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(2);
+
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
 	
 	glEnable(GL_DEPTH_TEST);
 
@@ -386,7 +509,13 @@ int main() {
 		glUseProgram(Program);
 
 
+		glm::vec3 lightColor = glm::vec3{ 1.0f, 1.0f, 1.0f };
+		GLint location3 = glGetUniformLocation(Program, "lightColor");
+		glUniform3fv(location3, 1, glm::value_ptr(lightColor));
 
+		glm::vec3 lightPos = glm::vec3{ 0.0f, -2.0f, 0.0f };
+		GLint location4 = glGetUniformLocation(Program, "lightPos");
+		glUniform3fv(location4, 1, glm::value_ptr(lightPos));
 
 
 
@@ -412,6 +541,7 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	//	float ambientStrength = 0.1;
 		
 		
 
