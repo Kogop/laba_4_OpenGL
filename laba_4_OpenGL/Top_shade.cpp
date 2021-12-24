@@ -3,11 +3,12 @@
 layout(Location = 0) in vec3 vertexPosition;
 layout(Location = 1) in vec3 vertexColor;
 layout(Location = 2) in vec3 vertexNormal;
-
+//layout(location = 3) in vec2 aTexCoords;
 
 out vec3 Color;
 out vec3 Normal;
 out vec3 FragPos;
+//out vec2 TexCoords;
 
 uniform mat4 MatModel;
 uniform mat4 MatVida;
@@ -22,4 +23,6 @@ void main() {
 	gl_Position = MatPerspective * MatVida  * MatModel * vec4(vertexPosition, 1.0);
 	FragPos = vec3(MatVida * MatModel * vec4(vertexPosition, 1.0));
 	Normal = normalize(MatNormal * vertexNormal);
+
+	//TexCoords = aTexCoords;
 }

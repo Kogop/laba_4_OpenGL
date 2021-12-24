@@ -513,7 +513,7 @@ int main() {
 		GLint location3 = glGetUniformLocation(Program, "lightColor");
 		glUniform3fv(location3, 1, glm::value_ptr(lightColor));
 
-		glm::vec3 lightPos = glm::vec3{ 0.0f, -2.0f, 1.0f };
+		glm::vec3 lightPos = glm::vec3{ 0.0f, 0.0f, 1.0f };
 		GLint location4 = glGetUniformLocation(Program, "LightPos");
 		glUniform3fv(location4, 1, glm::value_ptr(lightPos));
 
